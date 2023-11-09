@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/customTextContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -10,19 +12,38 @@
 
     <com.daon.customtext.CustomText
         android:id="@+id/customText1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        app:maintextSize="7sp"
+        app:maintextStyle="bold"
+        app:subtextSize="6sp"
+        app:subtextStyle="normal"
+        app:textFont="@font/taebaekmilkyway" />
 
     <com.daon.customtext.CustomText
         android:id="@+id/customText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        app:maintextSize="7sp"
+        app:maintextStyle="bold"
+        app:subtextSize="6sp"
+        app:subtextStyle="normal"
+        app:textFont="@font/taebaekmilkyway" />
 
     <com.daon.customtext.CustomText
         android:id="@+id/customText3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <!-- 다른 뷰 요소 추가 가능 -->
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        app:maintextSize="7sp"
+        app:maintextStyle="bold"
+        app:subtextSize="6sp"
+        app:subtextStyle="normal"
+        app:textFont="@font/taebaekmilkyway" />
 
 </LinearLayout>
