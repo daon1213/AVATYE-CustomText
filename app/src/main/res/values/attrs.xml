@@ -14,5 +14,6 @@
             <enum name="italic" value="2" />
         </attr>
         <attr name="textFont" format="reference" />
+        <attr name="textColor" format="color" />
     </declare-styleable>
 </resources>
