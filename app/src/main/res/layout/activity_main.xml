@@ -17,9 +17,10 @@
         android:layout_marginTop="3dp"
         android:layout_marginBottom="3dp"
         app:maintextSize="7sp"
-        app:maintextStyle="bold"
         app:subtextSize="6sp"
+        app:maintextStyle="bold"
         app:subtextStyle="normal"
+        app:textColor="@color/black"
         app:textFont="@font/taebaekmilkyway" />
 
     <com.daon.customtext.CustomText
@@ -29,9 +30,10 @@
         android:layout_marginTop="3dp"
         android:layout_marginBottom="3dp"
         app:maintextSize="7sp"
-        app:maintextStyle="bold"
         app:subtextSize="6sp"
+        app:maintextStyle="bold"
         app:subtextStyle="normal"
+        app:textColor="@color/blue"
         app:textFont="@font/taebaekmilkyway" />
 
     <com.daon.customtext.CustomText
@@ -41,9 +43,10 @@
         android:layout_marginTop="3dp"
         android:layout_marginBottom="3dp"
         app:maintextSize="7sp"
-        app:maintextStyle="bold"
         app:subtextSize="6sp"
+        app:maintextStyle="bold"
         app:subtextStyle="normal"
+        app:textColor="@color/purple"
         app:textFont="@font/taebaekmilkyway" />
 
 </LinearLayout>
