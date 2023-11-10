@@ -3,6 +3,7 @@ package com.daon.customtext
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
+import android.graphics.Color
 import android.graphics.Typeface
 import android.util.AttributeSet
 import android.util.Log
@@ -10,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import com.daon.customtext.databinding.CustomTextLayoutBinding
 
@@ -18,6 +20,10 @@ class CustomText(context: Context, attrs: AttributeSet?) : LinearLayout(context,
 
     private val binding: CustomTextLayoutBinding
     private val fontResourceId: Int
+    private var textNormal: TextStyle = TextStyle.NORMAL
+    private var textBold: TextStyle = TextStyle.BOLD
+    private var textItalic: TextStyle = TextStyle.ITALIC
+    private var textColor: Int = Color.BLACK // 기본값으로 BLACK 사용
 
     init {
         binding = CustomTextLayoutBinding.inflate(LayoutInflater.from(context), this)
@@ -30,23 +36,18 @@ class CustomText(context: Context, attrs: AttributeSet?) : LinearLayout(context,
 
         val SubtextSize = typedArray.getDimension(R.styleable.CustomTextView_subtextSize, 14f)
 
-        // textStyle 속성 가져오기
-        val MaintextStyle = typedArray.getInt(R.styleable.CustomTextView_maintextStyle, 1)
-
-        val MainEdittextStyle = typedArray.getInt(R.styleable.CustomTextView_maintextStyle, 1)
-
-        val SubtextStyle = typedArray.getInt(R.styleable.CustomTextView_subtextStyle, 0)
-
-        val SubEdittextStyle = typedArray.getInt(R.styleable.CustomTextView_subtextStyle, 0)
-
         // 폰트 파일 가져오기
         fontResourceId = typedArray.getResourceId(R.styleable.CustomTextView_textFont, 0)
         val typeface: Typeface? = if (fontResourceId != 0) {
             ResourcesCompat.getFont(context, fontResourceId)
         } else {
-            val customTypeface = Typeface.createFromAsset(context.assets, "font/taebaekmilkyway.otf")
+            val customTypeface =
+                Typeface.createFromAsset(context.assets, "font/taebaekmilkyway.otf")
             customTypeface
         }
+
+        // textColor 속성 가져오기
+        textColor = typedArray.getColor(R.styleable.CustomTextView_textColor, Color.BLACK)
 
         // textSize와 textStyle 적용
         binding.mainTextView.textSize = MaintextSize
@@ -54,26 +55,16 @@ class CustomText(context: Context, attrs: AttributeSet?) : LinearLayout(context,
         binding.subTextView.textSize = SubtextSize
         binding.subEditText.textSize = SubtextSize
 
-        when (MaintextStyle) {
-            1 -> binding.mainTextView.setTypeface(null, Typeface.BOLD)
-            2 -> binding.mainTextView.setTypeface(null, Typeface.ITALIC)
-            else -> binding.mainTextView.setTypeface(null, Typeface.NORMAL)
-        }
-        when (MainEdittextStyle) {
-            1 -> binding.mainEditText.setTypeface(null, Typeface.BOLD)
-            2 -> binding.mainEditText.setTypeface(null, Typeface.ITALIC)
-            else -> binding.mainEditText.setTypeface(null, Typeface.NORMAL)
-        }
-        when (SubtextStyle) {
-            1 -> binding.subTextView.setTypeface(null, Typeface.BOLD)
-            2 -> binding.subTextView.setTypeface(null, Typeface.ITALIC)
-            else -> binding.subTextView.setTypeface(null, Typeface.NORMAL)
-        }
-        when (SubEdittextStyle) {
-            1 -> binding.subEditText.setTypeface(null, Typeface.BOLD)
-            2 -> binding.subEditText.setTypeface(null, Typeface.ITALIC)
-            else -> binding.subEditText.setTypeface(null, Typeface.NORMAL)
-        }
+        applyTextStyle(binding.mainTextView, textBold)
+        applyTextStyle(binding.mainEditText, textBold)
+        applyTextStyle(binding.subTextView, textNormal)
+        applyTextStyle(binding.subEditText, textNormal)
+
+        // textColor 적용
+        binding.mainTextView.setTextColor(textColor)
+        binding.mainEditText.setTextColor(textColor)
+        binding.subTextView.setTextColor(textColor)
+        binding.subEditText.setTextColor(textColor)
 
         binding.subTextView.typeface = typeface
         binding.subEditText.typeface = typeface
@@ -184,5 +175,26 @@ class CustomText(context: Context, attrs: AttributeSet?) : LinearLayout(context,
             }
         val dialog = builder.create()
         dialog.show()
+    }
+
+    enum class TextStyle(val value: Int) {
+        NORMAL(0),
+        BOLD(1),
+        ITALIC(2);
+
+        companion object {
+            fun fromInt(value: Int): TextStyle {
+                return values().firstOrNull { it.value == value } ?: NORMAL
+            }
+        }
+    }
+
+    // applyTextStyle 함수 정의
+    private fun applyTextStyle(textView: TextView, style: TextStyle) {
+        when (style) {
+            TextStyle.NORMAL -> textView.setTypeface(null, Typeface.NORMAL)
+            TextStyle.BOLD -> textView.setTypeface(null, Typeface.BOLD)
+            TextStyle.ITALIC -> textView.setTypeface(null, Typeface.ITALIC)
+        }
     }
 }
